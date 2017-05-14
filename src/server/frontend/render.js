@@ -13,7 +13,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import config from '../config';
 import useragent from 'useragent';
-import {HOT_RELOAD_PORT} from '../../../webpack/constants';
+import HOT_RELOAD_PORT from '../../../webpack/constants';
 import {IntlProvider} from 'react-intl';
 import {Provider} from 'react-redux';
 import {RoutingContext, match} from 'react-router';
@@ -83,9 +83,11 @@ export default function render(req, res, next) {
 }
 
 function fetchComponentData(dispatch, req, {components, location, params}, {app, users}) {
+  console.log("components ", components);
   const fetchActions = components.reduce((actions, component) => {
     return actions.concat(component.fetchAction || []);
   }, []);
+  console.log("fetchedActions ", fetchActions);
   const promises = fetchActions.map(action => dispatch(action({
     location,
     params,
@@ -97,9 +99,9 @@ function fetchComponentData(dispatch, req, {components, location, params}, {app,
 function renderPage(store, renderProps, req) {
   const clientState = store.getState();
   const {headers, hostname} = req;
-  const appHtml = getAppHtml(store, renderProps);
   const scriptHtml = getScriptHtml(clientState, headers, hostname);
-
+  const appHtml = getAppHtml(store, renderProps);
+  
   return '<!DOCTYPE html>' + ReactDOMServer.renderToStaticMarkup(
       <Html
         appCssHash={config.assetsHashes.appCss}
@@ -112,13 +114,20 @@ function renderPage(store, renderProps, req) {
 }
 
 function getAppHtml(store, renderProps) {
-  return ReactDOMServer.renderToString(
+  console.log("reached at getAppHtml");
+  
+  var someObj = ReactDOMServer.renderToString(
     <Provider store={store}>
       <IntlProvider>
         <RoutingContext {...renderProps} />
       </IntlProvider>
     </Provider>
   );
+
+  console.log("someobj",typeOf(someObj));
+
+  return someObj
+  
 }
 
 function getScriptHtml(clientState, headers, hostname) {

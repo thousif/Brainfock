@@ -13,7 +13,7 @@ module.exports = { // eslint-disable-line no-undef
   getComponent(location, cb) {
 
     const Component = (process.env.IS_BROWSER)
-      ? require('react-router-proxy?!./GroupSchemes.page.js')
+      ? require('react-router-proxy-loader?!./GroupSchemes.page.js')
       : require('./GroupSchemes.page.js');
 
     cb(null, Component);

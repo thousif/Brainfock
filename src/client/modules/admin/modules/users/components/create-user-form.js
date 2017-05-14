@@ -9,7 +9,7 @@
  */
 import React from 'react';
 import Component from 'react-addons-pure-render-mixin';
-import TextField from 'material-ui/lib/text-field';
+import TextField from 'material-ui/TextField';
 
 class CreateUserForm extends React.Component {
 
@@ -28,6 +28,10 @@ class CreateUserForm extends React.Component {
     }
   }
 
+  somefun1 = (e)=> {
+    this.props.actions.setUserCreateFormField(e, -1, 'create');
+  }
+
   render() {
 
     const msg = this.props.msg.users;
@@ -41,9 +45,7 @@ class CreateUserForm extends React.Component {
         errorText={formData.meta.errors && formData.meta.errors.get('username') || ''}
         floatingLabelText={msg.form.label.username}
         name="username"
-        onChange={(e)=>{
-          this.props.actions.setUserCreateFormField(e, -1, 'create');
-        }.bind(this)}
+        onChange={this.somefun1(e)}
         value={formData.data.get('username')}
         />
 
@@ -55,9 +57,7 @@ class CreateUserForm extends React.Component {
         errorText={formData.meta.errors && formData.meta.errors.get('email') || ''}
         floatingLabelText={msg.form.label.email}
         name="email"
-        onChange={(e)=>{
-          this.props.actions.setUserCreateFormField(e, -1, 'create');
-        }.bind(this)}
+        onChange={this.somefun1(e)}
         value={formData.data.get('email')}
         />
 
@@ -69,9 +69,7 @@ class CreateUserForm extends React.Component {
           errorText={formData.meta.errors && formData.meta.errors.get('password') || ''}
           floatingLabelText={msg.form.label.password}
           name="password"
-          onChange={(e)=>{
-            this.props.actions.setUserCreateFormField(e, -1, 'create');
-          }.bind(this)}
+          onChange={this.somefun1(e)}
           type='password'
           value={formData.data.get('password')}
         />

@@ -24,7 +24,7 @@ import {
   AppCanvas,
   AppBar,
   //DropDownMenu,
-  Styles,
+  // styles,
   Avatar,
   RaisedButton
   // TextField
@@ -39,10 +39,14 @@ import AppSideNav from './components/app-left-nav';
 import QuickAdd from './components/QuickAdd';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import theme from 'material-ui/styles/baseThemes/LightBaseTheme';
 
-// const DefaultRawTheme = Styles.LightRawTheme;
+// console.log(styles);
 
-export class App extends React.Component {
+const DefaultRawTheme = theme;
+
+export default class App extends React.Component {
 
   static propTypes = {
     actions: PropTypes.object.isRequired,
@@ -68,8 +72,9 @@ export class App extends React.Component {
     super(args);
     this.state = {
       showUserMenu: false,
-    //  muiTheme: ThemeManager.getMuiTheme(DefaultRawTheme)
+      muiTheme: getMuiTheme(DefaultRawTheme)
     };
+    console.log("component mounting here");
   }
 
   componentWillMount() {
@@ -119,6 +124,8 @@ export class App extends React.Component {
 
     let newMuiTheme = this.state.muiTheme;
 
+    console.log(newMuiTheme);
+
     newMuiTheme.appBar.color = '#FBFBFB';
     newMuiTheme.appBar.textColor = '#3E3E3E';
 
@@ -137,7 +144,6 @@ export class App extends React.Component {
     const {location: {pathname}, msg, users: {viewer}} = this.props;
 
     let rightElement;
-
 
     let sectionTitle = this.props.app.activeSectionLabel || 'Brainfock';
     if (this.props.app.activeSectionLabel && this.props.app.activeSubSectionLabel) {

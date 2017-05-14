@@ -17,7 +17,7 @@ const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(webpackIso
 const devtools = 'eval';
 
 const loaders = {
-  css: '',
+  css: '',styl : '!stylus-loader',less : '!less-loader'
 };
 
 const serverIp = config.remoteHotReload
@@ -30,7 +30,7 @@ const makeConfig = (options) => {
   } = options;
 
   const stylesLoaders = Object.keys(loaders).map((ext) => {
-    const prefix = 'css-loader!postcss-loader';
+    const prefix = 'css-loader';
     const extLoaders = prefix + loaders[ext];
     const loader = isDevelopment
       ? `style-loader!${extLoaders}`
@@ -85,9 +85,9 @@ const makeConfig = (options) => {
           exclude: constants.NODE_MODULES_DIR,
           options: {
             cacheDirectory: true,
-            presets: [['es2015', { modules: false }], 'react', 'stage-1'],
+            presets: [['es2015', { modules: false }], 'react', 'stage-1','stage-0'],
             plugins: [
-              ['transform-runtime', {
+              ['transform-decorators-legacy','transform-runtime', {
                 helpers: false,
                 polyfill: false,
                 regenerator: false,
@@ -97,6 +97,7 @@ const makeConfig = (options) => {
               production: {
                 plugins: [
                   'transform-react-constant-elements',
+                  'transform-decorators-legacy'
                 ],
               },
             },

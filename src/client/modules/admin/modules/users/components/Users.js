@@ -16,9 +16,9 @@ import UserAvatar from '../../../../../users/components/Avatar';
 import Component from 'react-addons-pure-render-mixin';
 
 import {Utils} from 'material-ui';
-import RaisedButton from 'material-ui/lib/raised-button';
-import FlatButton from 'material-ui/lib/flat-button';
-import Dialog from 'material-ui/lib/dialog';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'material-ui/Dialog';
 import CreateUserForm from './create-user-form.js';
 import {CircularProgress} from 'material-ui';
 const Events = Utils.Events;
@@ -109,9 +109,6 @@ class Users extends React.Component {
       <FlatButton
         disabled={formData && formData.meta.isSubmitting === true}
         label={(formData && formData.meta.isSubmitting === true ? 'Saving...' : 'Submit')}
-        onTouchTap={(e)=>{
-          this.props.actions.saveUserCreateForm(-1, 'create', formData.data);
-        }.bind(this)}
         primary
         />,
     ];
@@ -213,3 +210,8 @@ class Users extends React.Component {
 }
 
 export default Users;
+
+
+// onTouchTap={(e)=>{
+//           this.props.actions.saveUserCreateForm(-1, 'create', formData.data);
+//         }.bind(this)}

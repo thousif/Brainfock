@@ -13,7 +13,7 @@ module.exports = { // eslint-disable-line no-undef
   getComponent(location, cb) {
 
     const Component = (process.env.IS_BROWSER)
-      ? require('react-router-proxy?!./components/Users')
+      ? require('react-router-proxy-loader?!./components/Users')
       : require('./components/Users');
 
     cb(null, Component);

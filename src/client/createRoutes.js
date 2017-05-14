@@ -22,7 +22,7 @@ export default function createRoutes(getState) {
     }
   }
 
-  const CreateWorkspace = (process.env.IS_BROWSER) ? require('react-router-proxy?!./workspace/create') : require('./workspace/create');
+  const CreateWorkspace = (process.env.IS_BROWSER) ? require('react-router-proxy-loader?!./workspace/create') : require('./workspace/create');
 
   return (
     <Route component={App} path="/">

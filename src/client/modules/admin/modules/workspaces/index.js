@@ -12,7 +12,7 @@ module.exports = { // eslint-disable-line no-undef
 
   getComponent(location, cb) {
     const Component = (process.env.IS_BROWSER)
-      ? require('react-router-proxy?!./components/workspaces.page')
+      ? require('react-router-proxy-loader?!./components/workspaces.page')
       : require('./components/workspaces.page');
 
     cb(null, Component);
